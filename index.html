@@ -28,73 +28,73 @@
 
     <link rel="shortcut icon" href="res/img/icon.ico"> <!-- charger la miniature -->
 
-    <title>Freepic - dessin vectoriel gratuit</title>
+    <title>Ça date - Devinez la date !</title>
 </head>
 
 <body>
 
-    <img id="dl-contest-img" src="res/data/SVGs/dinosaur_egg.svg" alt="image permettant de télécharger au format PNG">
-
-    <!-- popup des dessins -->
-    <div id="draws-popup">
-        <div id="popup-card">
-            <canvas id="canvas"></canvas>
-            <div class="left">
-                <img class="preview" src="res/data/SVGs/dinosaur_egg.svg" alt="preview de l'image à télécharger">
-            </div>
-            <div class="right">
-                <h2 class="title">Title</h2>
-                <div class="dl-buttons-container">
-                    <a id="dl-svg-link" href="res/data/SVGs/dinosaur_egg.svg" download><button id="dl-svg-btn"
-                            class="classic-button dl-draw"><i class="fa-solid fa-download"></i>
-                            SVG</button></a>
-                    <button onclick="downloadToPNG()" id="dl-png-btn" class="classic-button dl-draw"><i
-                            class="fa-solid fa-download"></i>
-                        PNG</button>
-                </div>
-                <div id="resolution-inputs-container">
-                    <input id="wd-resolution-input" class="text-input" type="number" value="150">
-                    <p>x</p>
-                    <input id="hg-resolution-input" class="text-input" type="number" value="150">
-                    <p>px</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- bouton retourner en haut de page -->
-    <!-- <div id="top-button">
-        <i class="fa-solid fa-arrow-up top-btn"></i>
-    </div> -->
-
-
-
-    <!-- barre de navigation de haut de page -->
-    <header>
-        <div class="center">
-            <h1><a href="#">freepic</a></h1>
-            <input placeholder="Search..." class="text-input" id="search-input" name="search" type="text">
-        </div>
-    </header>
-
     <!-- tout le contenu restant de la page -->
     <main id="principal">
-        <!-- <div class="card" onclick="handleClick(this)">
-            <img alt="caca" src="res/data/SVGs/caca.png">
-        </div> -->
+        <img src="res/img/logo.png" alt="logo du site" id="logo" draggable="false">
+        <h1>¡ Devinez la date ! </h1>
+
+        <div id="presentation-card">
+
+        </div>
+
+        <div id="game-parameters-container">
+            <div class="slider-container">
+                <div class="row">
+                    <p>Joueurs</p>
+                    <p id="players-nb-label">1</p>
+                </div>
+                <input id="players-nb-slider" type="range" min="1" max="10" step="1" value="1">
+
+                <div class="row">
+                    <p>Questions</p>
+                    <p id="questions-nb-label">1</p>
+                </div>
+                <input id="questions-nb-slider" type="range" min="5" max="25" step="1" value="15">
+            </div>
+
+            <div id="point-win-container">
+                <p>Gain des points</p>
+                <div>
+                    <label>
+                        <input id="nearest-radio" type="radio" name="radio" checked="">
+                        <span>Le plus proche</span>
+                    </label>
+                    <label>
+                        <input id="gap-slice-radio" type="radio" name="radio">
+                        <span>Tranche d'écart</span>
+                    </label>
+                </div>
+                <input id="gap-input" type="number" class="text-input" min="1" max="50" value="10">
+            </div>
+
+            <div id="create-game-container">
+                <button id="create-game-btn" class="classic-button">Créer</button>
+                <div id="create-game-tooltip" class="hidden">
+                    <button class="game-mode-btn left-btn" id="yes-btn"><i class="fa-solid fa-display"></i></button>
+                    <button class="game-mode-btn right-btn" id="no-btn"><i class="fa-solid fa-globe"></i></button>
+                </div>
+
+                <button id="join-game-btn" class="classic-button">Rejoindre</button>
+                <div id="join-game-tooltip" class="hidden">
+                    <p>Code : </p>
+                    <input class="text-input" type="number" min="0" max="4">
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer id="footer">
-        <h2>Suggest a drawing</h2>
-        <textarea class="text-input" id="suggestion-input" name="Suggestion"></textarea>
-        <button id="send-suggestion-btn" class="classic-button">Send</button>
-        <h3>Updated on august 2023</h3>
+    <footer>
+        <p>&COPY; 2023 - <a href="https://github.com/Hellolife2750" target="_blank">Hellolife2750</a> all rights
+            reserved</p>
     </footer>
 
     <!-- charger le js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="js/main.js"></script>
 
 </body>

@@ -1,165 +1,85 @@
-var cards;
-var cardsContainer = document.getElementById("principal");
+/**Update les labels en fonction de la valeur des sliders */
+const playersNbLabel = document.getElementById("players-nb-label");
+const questionsNbLabel = document.getElementById("questions-nb-label");
 
-const drawsJsonPath = 'res/data/draws.json'
+const playersNbSlider = document.getElementById("players-nb-slider");
+const questionsNbSlider = document.getElementById("questions-nb-slider");
 
-/*récupère le informations sur les draws contenus dans le fichier json*/
-fetch(drawsJsonPath)
-    .then(response => response.json())
-    .then(data => {
-        cards = data.draws;
-        let lastCard;
-
-        cards.forEach(card => {
-            cardsContainer.insertAdjacentHTML('beforeend', generateCardCode(card));
-            //lastCard = container.lastElementChild;
-
-            //cardsElements.push(lastCard);
-            /*lastCard.addEventListener('click', function (event) {
-                console.log(event.target)
-            });*/
-
-        });
-    })
-    .catch(error => console.error("MyError : Unable to load draws' card content :", error));
-
-//Génère le code pour la carte passée en paramètre
-function generateCardCode(card) {
-    let cardCode = `
-    <div class="card" onclick="handleClick(this)">
-        <img alt="${card.title}" src="${card.link}">
-    </div>
-    `
-    return cardCode;
-};
-
-const drawsPopup = document.getElementById("draws-popup");
-const popupCard = document.getElementById('popup-card');
-
-var projectsPopupOpened = false;
-var currentProjectIndex;
-
-function handleClick(cardClicked) {
-    currentProjectIndex = getIndexOfTitleId(cardClicked.querySelector("img").getAttribute("alt"));
-    loadPopupContent();
-    openCardPopup();
+// Fonction pour mettre à jour les labels
+function updateLabels() {
+    playersNbLabel.textContent = playersNbSlider.value;
+    questionsNbLabel.textContent = questionsNbSlider.value;
 }
 
-const pupPreview = popupCard.querySelector(".preview");
-const pupTitle = popupCard.querySelector(".title");
-const dlSvgLink = document.getElementById("dl-svg-link");
+// Ajoutez des gestionnaires d'événements aux sliders
+playersNbSlider.addEventListener("input", updateLabels);
+questionsNbSlider.addEventListener("input", updateLabels);
 
-function loadPopupContent() {
-    const currentProject = cards[currentProjectIndex];
+// Appelez la fonction updateLabels initialement pour afficher les valeurs par défaut
+updateLabels();
 
-    pupTitle.textContent = currentProject.title;
-    pupPreview.src = currentProject.link;
-    dlSvgLink.href = currentProject.link
-}
+/**Tooltip créer une partie */
+const createGameBtn = document.getElementById("create-game-btn");
+const tooltip = document.getElementById("create-game-tooltip");
+const yesBtn = document.getElementById("yes-btn");
+const noBtn = document.getElementById("no-btn");
 
-function getIndexOfTitleId(altContent) {
-    for (let i = 0; i < cards.length; i++) {
-        if (cards[i].title == altContent) {
-            return i;
-        }
-    }
-    return -1;
-}
+createGameBtn.addEventListener("click", () => {
+    // Positionnez le tooltip sous le bouton
+    const rect = createGameBtn.getBoundingClientRect();
+    // tooltip.style.left = rect.left + "px";
+    // tooltip.style.top = rect.bottom + "px";
+    const tooltipWidth = tooltip.offsetWidth;
+    const buttonWidth = createGameBtn.offsetWidth;
+    const xOffset = (buttonWidth - tooltipWidth) / 2; // Calcul de la position horizontale
+    tooltip.style.left = rect.left + xOffset + "px"; // Ajoutez xOffset à la position gauche
+    tooltip.style.top = rect.bottom + 10 + "px";
 
-document.addEventListener('mouseup', function (event) {
-    if (projectsPopupOpened && !popupCard.contains(event.target)) {
-        closeCardPopup();
-    }
+    // Affichez le tooltip
+    tooltip.style.display = "block";
+
+    // Ajoutez un écouteur d'événements pour détecter les clics en dehors du popup
+    document.addEventListener("click", outsideClickHandler);
 });
 
-function openCardPopup() {
-    projectsPopupOpened = true;
-    drawsPopup.style.display = "flex";
-}
-
-function closeCardPopup() {
-    projectsPopupOpened = false;
-    drawsPopup.style.display = "none";
-}
-
-//boutons permettant de dl
-const dlSvgBtn = document.getElementById("dl-svg-btn");
-const dlPngBtn = document.getElementById("dl-png-btn");
-
-const canvas = document.getElementById("canvas");
-const dlContestImg = document.getElementById("dl-contest-img");
-
-const wdResolutionInput = document.getElementById("wd-resolution-input");
-const hgResolutionInput = document.getElementById("hg-resolution-input");
-
-function downloadToPNG() {
-    dlContestImg.src = cards[currentProjectIndex].link;
-    dlContestImg.width = wdResolutionInput.value;
-    dlContestImg.height = hgResolutionInput.value;
-
-    canvas.width = dlContestImg.width;
-    canvas.height = dlContestImg.height;
-
-    const ctx = canvas.getContext("2d");
-
-    //mise à l'échelle
-    const scaleX = dlContestImg.width / dlContestImg.naturalWidth;
-    const scaleY = dlContestImg.height / dlContestImg.naturalHeight;
-    ctx.scale(scaleX, scaleY);
-
-    ctx.drawImage(dlContestImg, 0, 0);
-
-    canvas.toBlob(function (blob) {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "draw.png";
-
-        link.click();
-        // Libérer la ressource URL
-        URL.revokeObjectURL(link.href);
-    }, "image/png");
-}
-
-dlPngBtn.addEventListener('click', () => {
-    /*var canvas = document.createElement("canvas");
-    canvg(canvas, pupPreview.outerHTML);
-
-    html2canvas(canvas).then(function (canvas) {
-        // Créer un lien de téléchargement
-        var link = document.createElement("a");
-        link.download = "image.png"; // Nom du fichier téléchargé
-        link.href = canvas.toDataURL("image/png");
-
-        // Ajouter le lien au document et cliquer dessus pour déclencher le téléchargement
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });*/
-});
-
-//envoie un message sur un serv discord
-
-const sendSuggestionBtn = document.getElementById('send-suggestion-btn');
-const suggestionInput = document.getElementById('suggestion-input');
-
-sendSuggestionBtn.addEventListener('click', () => {
-    if (suggestionInput.value != "") {
-        sendMessage(suggestionInput.value);
-        suggestionInput.value = "";
+// Fonction pour gérer les clics en dehors du popup
+function outsideClickHandler(event) {
+    if (!tooltip.contains(event.target) && event.target !== createGameBtn) {
+        tooltip.style.display = "none";
+        document.removeEventListener("click", outsideClickHandler);
     }
+}
+
+// Pour masquer le tooltip lorsque vous cliquez sur "Oui" ou "Non"
+yesBtn.addEventListener("click", () => {
+    tooltip.style.display = "none";
+    document.removeEventListener("click", outsideClickHandler);
 });
 
-async function sendMessage(message) {
+noBtn.addEventListener("click", () => {
+    tooltip.style.display = "none";
+    document.removeEventListener("click", outsideClickHandler);
+});
 
-    var request = new XMLHttpRequest();
-    const discordResponse = await fetch("https://discord.com/api/webhooks/1141791205756248095/6RD-IJZT8wWI88QIwspIEtqRQFSW8jcPFMQF0uOHoe3kpus-_6Nyz7J5Mw9teXIykT17");
-    request.open("POST", "https://discord.com/api/webhooks/1141791205756248095/6RD-IJZT8wWI88QIwspIEtqRQFSW8jcPFMQF0uOHoe3kpus-_6Nyz7J5Mw9teXIykT17", true);
-    request.setRequestHeader('Content-type', 'application/json');
 
-    var params = {
-        username: "FreepicClient",
-        content: "" + message
-    };
+/**afficher ou cacher l'input de saisie de tolérance de marquage de points */
+const gapInput = document.getElementById("gap-input");
+const gapSlideRadio = document.getElementById("gap-slice-radio");
+const nearestRadio = document.getElementById("nearest-radio");
 
-    request.send(JSON.stringify(params));
+// Écoutez les changements d'état du bouton radio "Tranche d'écart"
+gapSlideRadio.addEventListener("change", changeGapSlideRadioVisibility);
+nearestRadio.addEventListener("change", changeGapSlideRadioVisibility);
+
+function changeGapSlideRadioVisibility() {
+    // Vérifiez si le bouton radio "Tranche d'écart" est coché
+    if (gapSlideRadio.checked) {
+        // Si oui, affichez l'input gap-input
+        gapInput.style.display = "block";
+    } else {
+        // Sinon, cachez-le
+        gapInput.style.display = "none";
+    }
 }
+
+changeGapSlideRadioVisibility();
