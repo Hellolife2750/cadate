@@ -113,3 +113,38 @@ function changeGapSlideRadioVisibility() {
 }
 
 changeGapSlideRadioVisibility();
+
+
+
+// Définir la valeur que vous souhaitez stocker dans le cookie
+var valeur = "bonjour";
+
+// Définir la durée de validité du cookie en jours
+var duree = 1; // Par exemple, 365 jours
+
+// Créer une date d'expiration pour le cookie
+var expirationDate = new Date();
+expirationDate.setDate(expirationDate.getDate() + duree);
+
+// Convertir la date d'expiration en une chaîne au format UTC
+var expirationString = expirationDate.toUTCString();
+
+// Créer le cookie avec la valeur et la date d'expiration
+document.cookie = "coock1=" + encodeURIComponent(valeur) + "; expires=" + expirationString + "; path=/";
+
+
+// Lire la valeur du cookie "monFichier.txt"
+/*var cookieValue = getCookie("coock1");
+console.log(cookieValue);
+
+function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf(name + '=') === 0) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+    return null;
+}*/
+
