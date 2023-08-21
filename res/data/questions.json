@@ -4,19 +4,19 @@
             "question": "Quand le premier téléphone a-t-il été inventé ?",
             "answer": "Le téléphone est inventé en 1876 par Graham Bell, une des inventions des pères fondateurs des télécommunications. Mais l'idée de transmettre la voix à distance est beaucoup plus ancienne.",
             "date": 1876,
-            "imgLink": ""
+            "imgLink": "example.jpg"
         },
         {
             "question": "Quand le rubik's cube a-il été inventé ?",
             "answer": "Inventé en 1974 par Ernö Rubik pour ses élèves de design et architecture, il a été commercialisé à l'échelle mondiale en 1980.",
             "date": 1974,
-            "imgLink": ""
+            "imgLink": "example.jpg"
         },
         {
             "question": "Quand la première ampoule électrique a-elle été inventée ?",
             "answer": "",
             "date": 1879,
-            "imgLink": ""
+            "imgLink": "example.jpg"
         }
     ]
 }

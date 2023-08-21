@@ -47,6 +47,7 @@ var questionsList = [];
 var questions;
 
 const questionsJsonPath = '../res/data/questions.json'
+const answersImgsPath = '../res/img/Responses/'
 
 fetch(questionsJsonPath) //récupère fichier JSON
     .then(response => response.json())
@@ -75,7 +76,7 @@ function pickQuestions(nbOfQuestions) {
         questionsList = shuffledQuestions.slice(0, nbOfQuestions);
     }
 
-    console.log(questionsList);
+    //console.log(questionsList);
 }
 
 function initializePlayerArrays(nbPlayers) {
@@ -116,9 +117,37 @@ function validateReponse() {
     reponseInput.value = "";
     if (playerTurnIndex < gameParameters.nbPlayers - 1) {
         playerTurnIndex++;
+        updateCurrentPlayer();
     } else {
         playerTurnIndex = 0;
         showAnswer();
+    }
+} updateCurrentPlayer();
+
+function updateCurrentPlayer() {
+    let currentPlayerDiv;
+    let currentPlayerInput;
+
+    resetPlayersColors();
+
+    currentPlayerDiv = document.querySelector(`#players-container .player-row:nth-child(${playerTurnIndex + 1})`);
+    currentPlayerDiv.style.backgroundColor = "#4398ff";
+    currentPlayerDiv.style.color = "white";
+
+    currentPlayerInput = document.querySelector(`#players-container .player-row:nth-child(${playerTurnIndex + 1}) .player-pseudo-input`);
+    currentPlayerInput.style.color = "white";
+}
+
+function resetPlayersColors() {
+    let currentPlayerDiv;
+    let currentPlayerInput;
+
+    for (i = 0; i < playersPoints.length; i++) {
+        currentPlayerDiv = document.querySelector(`#players-container .player-row:nth-child(${i + 1})`);
+        currentPlayerDiv.style.backgroundColor = "";
+        currentPlayerDiv.style.color = "black";
+        currentPlayerInput = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .player-pseudo-input`);
+        currentPlayerInput.style.color = "black";
     }
 }
 
@@ -129,11 +158,70 @@ function limitInputLength(input, maxLength) {
 }
 
 const nextQuestionBtn = document.getElementById("next-question-btn");
+const answerP = document.querySelector("#questions-card .answer-p");
+const dateResponseP = document.querySelector("#questions-card .date-response-p");
+const answerImg = document.getElementById("answer-img");
 
 function showAnswer() {
     updateProgressBar()
+    resetPlayersColors();
+    updateAnswerContent();
+    switchShownedCard("answer");
     nextQuestionBtn.style.visibility = "visible";
-    console.log(playersReponses);
+    givePoints(questionsList[questionIndex].date);
+    //console.log(playersReponses);
+}
+
+function updateAnswerContent() {
+    answerP.textContent = questionsList[questionIndex].answer;
+    dateResponseP.textContent = questionsList[questionIndex].date;
+    answerImg.src = answersImgsPath + questionsList[questionIndex].imgLink;
+}
+
+function givePoints(correctYear) {
+    if (gameParameters.gainType === "first") {
+        let minDifference = Infinity;
+        let lstIndexBestPlayers = [];
+
+        for (let i = 0; i < playersReponses.length; i++) {
+            const playerReponse = playersReponses[i];
+
+            const difference = Math.abs(playerReponse - correctYear);
+
+            if (difference < minDifference) {
+
+                minDifference = difference;
+                lstIndexBestPlayers = []
+                lstIndexBestPlayers.push(i);
+
+            } else if (difference === minDifference) {
+                lstIndexBestPlayers.push(i);
+            }
+        }
+
+        lstIndexBestPlayers.forEach(playerInd => {
+            addPointToPlayer(playerInd, 1);
+        });
+
+    } else if (gameParameters.gainType === "prox") {
+
+        for (let i = 0; i < playersReponses.length; i++) {
+            const playerReponse = playersReponses[i];
+
+            const difference = Math.abs(playerReponse - correctYear);
+
+            if (difference <= gameParameters.gapTolerance) {
+                addPointToPlayer(i, 1);
+            }
+        }
+    }
+}
+
+function addPointToPlayer(playerIndex, pointsAmount) {
+    //console.log(document.querySelector(`#players-container .player-row:nth-child(0) .player-points`))
+    let playerPointsElement = document.querySelector(`#players-container .player-row:nth-child(${playerIndex + 1}) .player-points`);
+    playerPointsElement.innerHTML = `${playersPoints[playerIndex]}pt <span class="green">+${pointsAmount}</span>`;
+    playersPoints[playerIndex] += pointsAmount;
 }
 
 function updateProgressBar() {
@@ -146,11 +234,38 @@ const questionLabel = document.getElementById("question-label");
 
 function showNextQuestion() {
     nextQuestionBtn.style.visibility = "hidden";
+    switchShownedCard("question");
+    updatePlayerPoints();
     if (questionIndex + 1 < questionsList.length) {
         questionIndex++;
         questionLabel.textContent = questionsList[questionIndex].question;
     } else {
         showFinalScreen();
+    }
+}
+
+function updatePlayerPoints() {
+    let playerPointsElement;
+    for (i = 0; i < playersPoints.length; i++) {
+        //console.log(document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .player-points`))
+        playerPointsElement = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .player-points`);
+        playerPointsElement.innerHTML = `${playersPoints[i]}pt`;
+    }
+    /*playersPoints.forEach(playerInd => {
+        playerPointsElement = document.querySelector(`#players-container .player-row:nth-child(${playerInd}) .player-points`);
+        playerPointsElement.innerHTML = `${playersPoints[playerInd]}pt`;
+    });*/
+}
+
+function switchShownedCard(cardType) {
+    if (cardType === "question") {
+        document.querySelector(`#questions-card .left`).style.display = "none";
+        document.querySelector(`#questions-card .right`).style.display = "none";
+        document.querySelector(`#questions-card .center`).style.display = "flex";
+    } else if (cardType === "answer") {
+        document.querySelector(`#questions-card .left`).style.display = "block";
+        document.querySelector(`#questions-card .right`).style.display = "flex";
+        document.querySelector(`#questions-card .center`).style.display = "none";
     }
 }
 

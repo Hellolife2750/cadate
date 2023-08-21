@@ -49,6 +49,7 @@ body {
   align-items: center;
   width: 70%;
   height: 100%;
+  transform: translateY(-10%);
 }
 
 #informations-container {
@@ -70,6 +71,7 @@ body {
   box-shadow: 0 5px 15px 0 rgba(112, 128, 175, 0.2);
   border-radius: 0.375rem;
   overflow: hidden;
+  /* max-height: 20px; */
 }
 
 #players-container .player-row {
@@ -112,7 +114,7 @@ body {
   align-items: center;
 }
 
-#questions-card .right {
+#questions-card .center {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -132,24 +134,64 @@ body {
 
 #progress-done {
   height: 100%;
-  width: 50%;
+  width: 100%;
   background: rgba(66, 214, 15, 1);
   border-radius: 10px;
 
   transition: all 1s ease-in-out;
 }
 
-.question-p {
+.question-p,
+.answer-p {
   font-weight: bold;
   font-size: 1.2rem;
   letter-spacing: 0.05em;
   line-height: 1.3em;
-  text-align: center;
+  text-align: justify;
   margin-bottom: 2rem;
+}
+
+.date-response-p {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 2rem;
+  color: rgb(43, 99, 184);
+}
+
+/*la*/
+#questions-card .left,
+#questions-card .right {
+  width: 50%;
+  display: none;
+}
+
+#questions-card img {
+  width: 70%;
+  border-radius: 0.5rem;
+
+  transition: all 0.5s ease-in-out 0.2s;
+}
+
+#questions-card img:hover {
+  scale: 1.07;
+
+  transition: all 0.5s ease-in-out;
+}
+
+#questions-card .right {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #reponse-input {
   width: 25%;
+}
+
+.green {
+  color: rgb(9, 202, 9);
+  font-weight: bold;
 }
 
 .classic-button {
