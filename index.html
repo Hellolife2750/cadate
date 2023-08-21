@@ -39,10 +39,17 @@
         <h1>¡ Devinez la date ! </h1>
 
         <div id="presentation-card">
-
+            <div class="left">
+                <img src="res/img/example.jpg" alt="image exemple">
+            </div>
+            <div class="right">
+                <p class="question-p">Quand la première ampoule électrique a-elle été inventée ?</p>
+                <p class="date-response-p">1879</p>
+            </div>
         </div>
 
         <div id="game-parameters-container">
+            <h2>Créer une partie</h2>
             <div class="slider-container">
                 <div class="row">
                     <p>Joueurs</p>
@@ -74,13 +81,13 @@
 
             <div id="create-game-container">
                 <button id="create-game-btn" class="classic-button">Créer</button>
-                <div id="create-game-tooltip" class="hidden">
+                <div id="create-game-tooltip" class="hidden little-tooltip">
                     <button class="game-mode-btn left-btn" id="yes-btn"><i class="fa-solid fa-display"></i></button>
                     <button class="game-mode-btn right-btn" id="no-btn"><i class="fa-solid fa-globe"></i></button>
                 </div>
 
                 <button id="join-game-btn" class="classic-button">Rejoindre</button>
-                <div id="join-game-tooltip" class="hidden">
+                <div id="join-game-tooltip" class="hidden little-tooltip">
                     <p>Code : </p>
                     <input class="text-input" type="number" min="0" max="4">
                 </div>

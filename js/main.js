@@ -27,28 +27,26 @@ const noBtn = document.getElementById("no-btn");
 createGameBtn.addEventListener("click", () => {
     // Positionnez le tooltip sous le bouton
     const rect = createGameBtn.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop; // Obtenir l'offset en Y du scroll
+
     // tooltip.style.left = rect.left + "px";
     // tooltip.style.top = rect.bottom + "px";
     const tooltipWidth = tooltip.offsetWidth;
     const buttonWidth = createGameBtn.offsetWidth;
     const xOffset = (buttonWidth - tooltipWidth) / 2; // Calcul de la position horizontale
+    const yOffset = rect.bottom + scrollTop + 10; // Calcul de la position verticale en tenant compte du scroll
+
     tooltip.style.left = rect.left + xOffset + "px"; // Ajoutez xOffset à la position gauche
-    tooltip.style.top = rect.bottom + 10 + "px";
+    tooltip.style.top = yOffset + "px";
 
     // Affichez le tooltip
     tooltip.style.display = "block";
 
     // Ajoutez un écouteur d'événements pour détecter les clics en dehors du popup
-    document.addEventListener("click", outsideClickHandler);
+    document.addEventListener("click", () => {
+        outsideClickHandler(event, tooltip, createGameBtn)
+    });
 });
-
-// Fonction pour gérer les clics en dehors du popup
-function outsideClickHandler(event) {
-    if (!tooltip.contains(event.target) && event.target !== createGameBtn) {
-        tooltip.style.display = "none";
-        document.removeEventListener("click", outsideClickHandler);
-    }
-}
 
 // Pour masquer le tooltip lorsque vous cliquez sur "Oui" ou "Non"
 yesBtn.addEventListener("click", () => {
@@ -60,6 +58,38 @@ noBtn.addEventListener("click", () => {
     tooltip.style.display = "none";
     document.removeEventListener("click", outsideClickHandler);
 });
+
+const joinGameTooltip = document.getElementById("join-game-tooltip");
+const joinGameBtn = document.getElementById("join-game-btn");
+
+joinGameBtn.addEventListener("click", () => {
+    const rect = joinGameBtn.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop; // Obtenir l'offset en Y du scroll
+
+    const tooltipWidth = joinGameTooltip.offsetWidth;
+    const buttonWidth = joinGameBtn.offsetWidth;
+    const xOffset = (buttonWidth - tooltipWidth) / 2; // Calcul de la position horizontale
+    const yOffset = rect.bottom + scrollTop + 10; // Calcul de la position verticale en tenant compte du scroll
+
+    joinGameTooltip.style.left = rect.left + xOffset + "px"; // Ajoutez xOffset à la position gauche
+    joinGameTooltip.style.top = yOffset + "px";
+
+    // Affichez le tooltip
+    joinGameTooltip.style.display = "flex";
+
+    // Ajoutez un écouteur d'événements pour détecter les clics en dehors du popup
+    document.addEventListener("click", () => {
+        outsideClickHandler(event, joinGameTooltip, joinGameBtn)
+    });
+});
+
+// Fonction pour gérer les clics en dehors du popup
+function outsideClickHandler(event, tlTip, btn) {
+    if (!tlTip.contains(event.target) && event.target !== btn) {
+        tlTip.style.display = "none";
+        document.removeEventListener("click", outsideClickHandler);
+    }
+}
 
 
 /**afficher ou cacher l'input de saisie de tolérance de marquage de points */
