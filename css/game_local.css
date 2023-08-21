@@ -1,0 +1,246 @@
+/*général*/
+:root {
+  --primary: #0d6ce0;
+  --secondary: #2b81e9;
+  --light: whitesmoke;
+  --dark: black;
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  background-color: #a6dcf5;
+  font-weight: bold;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: var(--light);
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*section principale*/
+#principal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  height: 100%;
+}
+
+#informations-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5%;
+}
+
+#questions-container {
+  width: 65%;
+  position: relative;
+}
+
+#players-container {
+  width: 20%;
+  background-color: white;
+  box-shadow: 0 5px 15px 0 rgba(112, 128, 175, 0.2);
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+#players-container .player-row {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#players-container .player-row:nth-child(odd) {
+  background-color: white;
+}
+
+#players-container .player-row:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+#players-container .player-pseudo-input {
+  background: none;
+  outline: none;
+  border: none;
+  width: 50%;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+#players-container p {
+  font-size: 1.2rem;
+}
+
+#questions-card {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 5px 15px 0 rgba(112, 128, 175, 0.2);
+  border-radius: 0.375rem;
+
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#questions-card .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#progress {
+  height: 0.7rem;
+  width: 100%;
+  /* background: rgb(125, 125, 125); */
+  background-color: white;
+  /* border: 2px solid #b5bfd9; */
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 5px 15px 0 rgba(112, 128, 175, 0.2);
+}
+
+#progress-done {
+  height: 100%;
+  width: 50%;
+  background: rgba(66, 214, 15, 1);
+  border-radius: 10px;
+
+  transition: all 1s ease-in-out;
+}
+
+.question-p {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  line-height: 1.3em;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#reponse-input {
+  width: 25%;
+}
+
+.classic-button {
+  color: #707070;
+  background-color: #fff;
+  font-weight: bold;
+  border: 2px solid #b5bfd9;
+  letter-spacing: 0.07em;
+  text-align: center;
+  border-radius: 0.375em;
+  width: 200px;
+  padding: 10px;
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out 0.1s;
+}
+
+.classic-button:hover {
+  color: #4398ff;
+  border-color: #4398ff;
+  background-color: #fafafa;
+  box-shadow: 0 0 0 4px #b5c9fc;
+  transform: translateY(-15%);
+  /* scale: 1.05; */
+
+  transition: all 0.3s ease-in-out;
+}
+
+.classic-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: var(--secondary);
+  color: whitesmoke;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out,
+    background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+#next-question-btn {
+  width: 20%;
+  font-size: 1rem;
+  margin-top: 1.2rem;
+  position: absolute;
+  right: 0;
+  visibility: hidden;
+}
+
+/*footer*/
+footer {
+  /* margin-top: 5rem;
+  margin-bottom: 10px; */
+  position: absolute;
+  bottom: 10px;
+}
+
+footer a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.text-input {
+  border-radius: 2rem;
+  height: 30px;
+  width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  padding: 10px;
+  outline: none;
+  border: 0;
+  font-size: 1rem;
+  text-align: center;
+  border: 2px solid #b5bfd9;
+
+  transition: all 0.5s ease-in-out 0.2s;
+}
+
+.text-input:hover,
+.text-input:focus {
+  /* box-shadow: 0px 0px 10px white; */
+  box-shadow: 0 0 0 3px #b5c9fc;
+
+  transition: all 0.5s ease-in-out;
+}
+
+/* taille tablette */
+@media (max-width: 1000px) {
+}
+
+/* taille smartphone */
+@media (max-width: 700px) {
+}

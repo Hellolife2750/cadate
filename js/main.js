@@ -115,7 +115,7 @@ function changeGapSlideRadioVisibility() {
 changeGapSlideRadioVisibility();
 
 
-
+/*
 // Définir la valeur que vous souhaitez stocker dans le cookie
 var valeur = "bonjour";
 
@@ -131,7 +131,23 @@ var expirationString = expirationDate.toUTCString();
 
 // Créer le cookie avec la valeur et la date d'expiration
 document.cookie = "coock1=" + encodeURIComponent(valeur) + "; expires=" + expirationString + "; path=/";
+*/
 
+/**lancer une partie */
+var gameParameters = { "nbPlayers": 0, "nbQuestions": 0, "gainType": "first/prox", "gapTolerance": 10 };
+
+function launchLocalGame() {
+    storeGameParametersInCoockies()
+    window.open('html/game_local.html');
+}
+
+function storeGameParametersInCoockies() {
+    gameParameters = { "nbPlayers": playersNbSlider.value, "nbQuestions": questionsNbSlider.value, "gainType": "first/prox", "gapTolerance": gapInput.value }
+    nearestRadio.checked ? gameParameters.gainType = "first" : gameParameters.gainType = "prox";
+
+    var gameParametersJSON = JSON.stringify(gameParameters);
+    document.cookie = "gameParameters=" + gameParametersJSON;
+}
 
 // Lire la valeur du cookie "monFichier.txt"
 /*var cookieValue = getCookie("coock1");

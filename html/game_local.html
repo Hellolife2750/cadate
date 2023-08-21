@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="desciption" content="dessin vectoriels SVG gratuits">
+    <!-- <link rel="manifest" href="res/data/manifest/manifest.webmanifest"> -->
+
+    <!-- charger la police d'écriture -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Phudu:wght@500&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+
+    <!-- charger le style -->
+    <link href="../css/reset.css" rel="stylesheet">
+    <link href="../css/game_local.css" rel="stylesheet">
+
+    <!-- charger les icônes (font awesome)-->
+    <script src="https://kit.fontawesome.com/bf31f3517c.js" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" href="../res/img/icon.ico"> <!-- charger la miniature -->
+
+    <title>Ça date - Partie locale</title>
 </head>
 
 <body>
-    <p>Test</p>
 
+    <!-- tout le contenu restant de la page -->
+    <main id="principal">
+        <img src="../res/img/logo.png" alt="logo du site" id="logo" draggable="false">
+
+        <div id="informations-container">
+            <div id="questions-container">
+                <div id="progress">
+                    <div id="progress-done"></div>
+                </div>
+
+                <div id="questions-card">
+                    <!-- <div class="left">
+                        <img src="../es/img/example.jpg" alt="image exemple">
+                    </div> -->
+                    <div class="right">
+                        <p id="question-label" class="question-p">Quand la première ampoule électrique a-elle été
+                            inventée ?
+                        </p>
+                        <!-- <p class="date-response-p">1879</p> -->
+                        <input id="reponse-input" type="number" class="text-input" value="" min="0"
+                            oninput="limitInputLength(this, 4)"
+                            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+                    </div>
+                </div>
+
+                <button id="next-question-btn" class="classic-button" onclick="showNextQuestion()">Suivant</button>
+            </div>
+
+            <div id="players-container">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&COPY; 2023 - <a href="https://github.com/Hellolife2750" target="_blank">Hellolife2750</a> all rights
+            reserved</p>
+    </footer>
+
+    <!-- charger le js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
     <script src="../js/game_local.js"></script>
+
 </body>
 
 </html>
