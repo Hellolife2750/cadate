@@ -43,7 +43,7 @@ var playerTurnIndex = 0;
 var playersPoints = [];
 var playersReponses = [];
 
-var questionIndex = 0;
+var questionIndex = -1;
 var questionsList = [];
 var questions;
 
@@ -138,7 +138,6 @@ function updateValidatedProposition(arePropositionsHidden) {
             playerPropositionElement.textContent = `---`;
         }
     } else {
-        console.log("là")
         for (i = 0; i < playersPoints.length; i++) {
             playerPropositionElement = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .proposition`);
             playerPropositionElement.textContent = `${playersReponses[i]}`;
@@ -185,10 +184,11 @@ const dateResponseP = document.querySelector("#questions-card .date-response-p")
 const answerImg = document.getElementById("answer-img");
 
 function showAnswer() {
-    updateProgressBar()
+    updateProgressBar();
     resetPlayersColors();
     updateAnswerContent();
     switchShownedCard("answer");
+    updateNextQuestionBtn();
     nextQuestionBtn.style.visibility = "visible";
     setTimeout(() => {
         nextQuestionBtn.focus();
@@ -196,6 +196,14 @@ function showAnswer() {
     updateValidatedProposition(false);
     givePoints(questionsList[questionIndex].date);
     //console.log(playersReponses);
+}
+
+function updateNextQuestionBtn() {
+    if (questionIndex < questionsList.length - 1) {
+        nextQuestionBtn.innerText = "Suivant";
+    } else {
+        nextQuestionBtn.innerText = "Terminer";
+    }
 }
 
 function updateAnswerContent() {
@@ -251,8 +259,8 @@ function addPointToPlayer(playerIndex, pointsAmount) {
 }
 
 function updateProgressBar() {
-    let pg = questionIndex * 100 / questionsList.length
-    if (questionIndex == 0) { pg = 0; }
+    let pg = (questionIndex + 1) * 100 / questionsList.length
+    if (questionIndex == -1) { pg = 0; }
     progressBar.style.width = pg + "%";
 } updateProgressBar();
 
@@ -265,9 +273,10 @@ function showNextQuestion() {
     }, 500);
     switchShownedCard("question");
     updatePlayerPoints();
-    if (questionIndex + 1 < questionsList.length) {
+    if (questionIndex < questionsList.length - 1) {
         questionIndex++;
         questionLabel.textContent = questionsList[questionIndex].question;
+        updateCurrentPlayer();
     } else {
         showFinalScreen();
     }
@@ -300,4 +309,5 @@ function switchShownedCard(cardType) {
 
 function showFinalScreen() {
     //a faire
+    console.log("fin!!!");
 }

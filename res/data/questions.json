@@ -14,9 +14,39 @@
         },
         {
             "question": "Quand la première ampoule électrique a-elle été inventée ?",
-            "answer": "",
+            "answer": "En 1879, Thomas Edison réussit à produire un éclairage durable en faisant passer du courant à travers un filament de coton carbonisé, dans une ampoule sous vide.",
             "date": 1879,
             "imgLink": "ampoule_electrique.jpg"
+        },
+        {
+            "question": "Quand le Velcro a-il été inventé ?",
+            "answer": "Le système de fixation crochets et boucles textile a été inventé par hasard en 1948 par l'ingénieur électricien suisse George de Mestral.",
+            "date": 1948,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand le premier smartphone est-il paru ?",
+            "answer": " Le premier téléphone portable officiellement baptisé “smartphone”, le GS88 d’Ericsson, fut présenté en 1997. Il proposait des nombreuses fonctionnalités avec notamment le possibilité d'y installer des applications.",
+            "date": 1997,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand le premier satellite a-t-il été lancé dans l'espace ?",
+            "answer": "En octobre 1957, l'Union soviétique lance Spoutnik 1, le premier satellite artificiel en orbite autour de la Terre.",
+            "date": 1957,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand ont-été produits les premiers préservatifs en latex ?",
+            "answer": "En 1880, les premiers préservatifs en latex sont produits, qui se démocratisent à partir de 1930. En 1901 apparaissent les premiers préservatifs aromatisés, colorés, aux formes et textures les plus surprenantes.",
+            "date": 1880,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand les premiers LEGO ont-ils été créés ?",
+            "answer": "Les premiers jouets Lego sont créés en 1932 par un charpentier danois, Ole Kirk Christiansen. Le nom lego vient des mots danois leg godt, qui signifient « joue bien ».",
+            "date": 1932,
+            "imgLink": "default.png"
         }
     ]
 }
