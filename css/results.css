@@ -105,8 +105,44 @@ h1 {
   font-size: 2.3rem;
   color: rgb(43, 99, 184);
   margin-top: 3rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem; /*4rem*/
   /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
+}
+
+#questions-nb {
+  color: rgb(43, 99, 184);
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+}
+
+.progress {
+  height: 0.7rem;
+  width: 35%;
+  /* background: rgb(125, 125, 125); */
+  /* background-color: rgb(223, 209, 4); */
+  background-color: rgb(201, 201, 201);
+  /* border: 2px solid #b5bfd9; */
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem;
+  box-shadow: 0 5px 15px 0 rgba(112, 128, 175, 0.2);
+}
+
+.progress-done {
+  height: 100%;
+  width: 0%;
+  background: rgba(66, 214, 15, 1);
+  border-radius: 10px;
+
+  transition: all 1s ease-in-out;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 50%;
 }
 
 #replay-btn {

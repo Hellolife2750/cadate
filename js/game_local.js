@@ -310,7 +310,8 @@ function switchShownedCard(cardType) {
 
 function showFinalScreen() {
     storePlayersPointsInCoockies();
-    window.location.replace('results.html');
+    //window.location.replace('results.html');
+    window.location.href = 'results.html';
 }
 
 function storePlayersPointsInCoockies() {
@@ -324,4 +325,7 @@ function storePlayersPointsInCoockies() {
 
     var playersPointsWithNamesJSON = JSON.stringify(playersPointsWithNames);
     document.cookie = "playersPointsWithNames=" + playersPointsWithNamesJSON;
+
+    var nbQuestionsJSON = JSON.stringify(questionsList.length);
+    document.cookie = "nbQuestions=" + nbQuestionsJSON;
 }

@@ -1,6 +1,8 @@
 /**Lire coockie des points des joueurs */
 var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)playersPointsWithNames\s*=\s*([^;]*).*$)|^.*$/, "$1");
 var playersPointsWithNames = JSON.parse(cookieValue);
+cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)nbQuestions\s*=\s*([^;]*).*$)|^.*$/, "$1");
+var nbQuestions = JSON.parse(cookieValue);
 
 /**Générer liste des résultats */
 const resultsCard = document.getElementById("results-card");
@@ -43,13 +45,24 @@ function getResultLineCode(playerName, playerPoints, isFirst) {
         emoji = "🏆";
     }
 
+    let pg = (playerPoints) * 100 / nbQuestions
+
     let code = `
       <div class="player-row">
           <p class="player-name">${playerName} ${emoji}</p>
+          
+          <div class="row">
           <p class="player-points">${playerPoints} pts</p>
+          <div class="progress">
+              <div class="progress-done" style="width: ${pg}%;"></div>
+          </div>
+      </div> 
       </div>
     `
     return code;
 }
 
 fillResultsCard();
+
+const questionsNb = document.getElementById("questions-nb");
+questionsNb.textContent = nbQuestions + " Questions"

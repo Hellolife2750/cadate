@@ -1,3 +1,26 @@
+/**Lire coockies des paramètres permanants */
+var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)permanantGameParameters\s*=\s*([^;]*).*$)|^.*$/, "$1");
+var permanantGameParameters;
+if (cookieValue) {
+    permanantGameParameters = JSON.parse(cookieValue);
+    //loadPresetsParameters();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    loadPresetsParameters();
+});
+
+function loadPresetsParameters() {
+    nearestRadio.checked = false;
+    gapSlideRadio.checked = false;
+    permanantGameParameters.gainType === "first" ? nearestRadio.checked = true : gapSlideRadio.checked = true;
+    changeGapSlideRadioVisibility()
+    playersNbSlider.value = permanantGameParameters.nbPlayers;
+    questionsNbSlider.value = permanantGameParameters.nbQuestions;
+    gapInput.value = permanantGameParameters.gapTolerance;
+    updateLabels();
+}
+
 /**Update les labels en fonction de la valeur des sliders */
 const playersNbLabel = document.getElementById("players-nb-label");
 const questionsNbLabel = document.getElementById("questions-nb-label");
@@ -144,7 +167,8 @@ var gameParameters = { "nbPlayers": 0, "nbQuestions": 0, "gainType": "first/prox
 
 function launchLocalGame() {
     storeGameParametersInCoockies()
-    window.open('html/game_local.html');
+    //window.open('html/game_local.html');
+    window.location.href = 'html/game_local.html';
 }
 
 function storeGameParametersInCoockies() {
@@ -153,6 +177,12 @@ function storeGameParametersInCoockies() {
 
     var gameParametersJSON = JSON.stringify(gameParameters);
     document.cookie = "gameParameters=" + gameParametersJSON;
+
+
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    var expirationString = expirationDate.toUTCString();
+    document.cookie = "permanantGameParameters=" + gameParametersJSON + "; expires=" + expirationString + "; path=/";
 }
 
 // Lire la valeur du cookie "monFichier.txt"
