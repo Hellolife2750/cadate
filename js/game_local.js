@@ -277,6 +277,7 @@ function showNextQuestion() {
         questionIndex++;
         questionLabel.textContent = questionsList[questionIndex].question;
         updateCurrentPlayer();
+        updateValidatedProposition(true);
     } else {
         showFinalScreen();
     }
@@ -308,6 +309,19 @@ function switchShownedCard(cardType) {
 }
 
 function showFinalScreen() {
-    //a faire
-    console.log("fin!!!");
+    storePlayersPointsInCoockies();
+    window.location.replace('results.html');
+}
+
+function storePlayersPointsInCoockies() {
+    var playersPointsWithNames = {};
+
+    let playerName;
+    for (i = 0; i < playersPoints.length; i++) {
+        playerName = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .player-pseudo-input`).value;
+        playersPointsWithNames[playerName] = playersPoints[i];
+    }
+
+    var playersPointsWithNamesJSON = JSON.stringify(playersPointsWithNames);
+    document.cookie = "playersPointsWithNames=" + playersPointsWithNamesJSON;
 }
