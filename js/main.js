@@ -4,11 +4,11 @@ var permanantGameParameters;
 if (cookieValue) {
     permanantGameParameters = JSON.parse(cookieValue);
     //loadPresetsParameters();
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-    loadPresetsParameters();
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        loadPresetsParameters();
+    });
+}
 
 function loadPresetsParameters() {
     nearestRadio.checked = false;

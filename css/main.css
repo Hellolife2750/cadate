@@ -432,6 +432,10 @@ footer a:hover {
   text-decoration: underline;
 }
 
+footer span {
+  cursor: pointer;
+}
+
 .text-input {
   border-radius: 2rem;
   height: 30px;
