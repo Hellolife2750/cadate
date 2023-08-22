@@ -31,6 +31,7 @@ function getPlayerLineCode(playerIndex) {
     let code = `
     <div class="player-row">
         <input type="text" class="player-pseudo-input" value="Player${playerIndex}"></input>
+        <p class="proposition">---</p>
         <p class="player-points">0pt</p>
     </div>
     `
@@ -118,11 +119,32 @@ function validateReponse() {
     if (playerTurnIndex < gameParameters.nbPlayers - 1) {
         playerTurnIndex++;
         updateCurrentPlayer();
+        updateValidatedProposition(true);
     } else {
         playerTurnIndex = 0;
         showAnswer();
     }
 } updateCurrentPlayer();
+
+function updateValidatedProposition(arePropositionsHidden) {
+    let playerPropositionElement;
+    if (arePropositionsHidden) {
+        for (i = 0; i < playerTurnIndex; i++) {
+            playerPropositionElement = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .proposition`);
+            playerPropositionElement.textContent = `✔️`;
+        }
+        for (i = playerTurnIndex; i < playersPoints.length; i++) {
+            playerPropositionElement = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .proposition`);
+            playerPropositionElement.textContent = `---`;
+        }
+    } else {
+        console.log("là")
+        for (i = 0; i < playersPoints.length; i++) {
+            playerPropositionElement = document.querySelector(`#players-container .player-row:nth-child(${i + 1}) .proposition`);
+            playerPropositionElement.textContent = `${playersReponses[i]}`;
+        }
+    }
+}
 
 function updateCurrentPlayer() {
     let currentPlayerDiv;
@@ -168,6 +190,10 @@ function showAnswer() {
     updateAnswerContent();
     switchShownedCard("answer");
     nextQuestionBtn.style.visibility = "visible";
+    setTimeout(() => {
+        nextQuestionBtn.focus();
+    }, 500);
+    updateValidatedProposition(false);
     givePoints(questionsList[questionIndex].date);
     //console.log(playersReponses);
 }
@@ -234,6 +260,9 @@ const questionLabel = document.getElementById("question-label");
 
 function showNextQuestion() {
     nextQuestionBtn.style.visibility = "hidden";
+    setTimeout(() => {
+        reponseInput.focus();
+    }, 500);
     switchShownedCard("question");
     updatePlayerPoints();
     if (questionIndex + 1 < questionsList.length) {

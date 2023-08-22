@@ -102,6 +102,7 @@ gapSlideRadio.addEventListener("change", changeGapSlideRadioVisibility);
 nearestRadio.addEventListener("change", changeGapSlideRadioVisibility);
 
 function changeGapSlideRadioVisibility() {
+    changeMinNbPlayer();
     // Vérifiez si le bouton radio "Tranche d'écart" est coché
     if (gapSlideRadio.checked) {
         // Si oui, affichez l'input gap-input
@@ -114,6 +115,11 @@ function changeGapSlideRadioVisibility() {
 
 changeGapSlideRadioVisibility();
 
+//Vérifie que le joueur ne joue pas seul avec l'option 'le plus proche'.
+function changeMinNbPlayer() {
+    nearestRadio.checked ? playersNbSlider.min = "2" : playersNbSlider.min = "1";
+    updateLabels();
+}
 
 /*
 // Définir la valeur que vous souhaitez stocker dans le cookie
