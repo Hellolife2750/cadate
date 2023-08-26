@@ -47,6 +47,48 @@
             "answer": "Les premiers jouets Lego sont créés en 1932 par un charpentier danois, Ole Kirk Christiansen. Le nom lego vient des mots danois leg godt, qui signifient « joue bien ».",
             "date": 1932,
             "imgLink": "default.png"
+        },
+        {
+            "question": "Quand a été inventé le premier appareil photo numérique ?",
+            "answer": "Inventé par Steve Sasson en 1975, cet appareil photo produit des images en noir et blanc avec une résolution de 100x100pixels.",
+            "date": 1975,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand a été inventé le lecteur CD ?",
+            "answer": "Sony lance le CDP-101 en 1982. Ce dernier permet de lire, grâce à un laser, les données stockées sur un disque de plastique.",
+            "date": 1982,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand est sortie la première Game Boy ?",
+            "answer": "Nintendo sort sa console en 1989, qu'il vendra à plus de 118 millions d'exemplaires. Son écran de 3 pouces en niveaux de gris la rend compacte et facilement transportable.",
+            "date": 1989,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand fut inventée la première souris d'ordinateur ?",
+            "answer": "Conçue par 2 ingénieurs de Stanford, elle possède une coque en bois, un bouton et 2 roues dentées pour enregistrer les mouvements. Sa facilité d'emploi l'emporte sur le joystick alors à l'essai.",
+            "date": 1965,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand a été inventée la télécommande TV sans fil ?",
+            "answer": "Eugene Polley invente la Zenith Flash-Matic. En forme de pistolet, cette dernière émettait des faisceaux lumineux afin de changer la chaîne et le son.",
+            "date": 1955,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand fut inventé le premier disque dur ?",
+            "answer": "Le 350 Disk System est lancé par IBM. Il mesurait 1,72m de haut pour 1 tonne et pouvait stocker jusqu'à 3,75Mo de données.",
+            "date": 1956,
+            "imgLink": "default.png"
+        },
+        {
+            "question": "Quand fut inventé le premier hélicoptère fonctionnel ?",
+            "answer": "Igor Sikorsky invente le VS-300 en 1939. Il réalisera son premier vol libre 1 an plus tard.",
+            "date": 1939,
+            "imgLink": "default.png"
         }
     ]
 }

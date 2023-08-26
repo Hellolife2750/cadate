@@ -353,10 +353,6 @@ h1 {
   border: 2px solid #b5bfd9;
 }
 
-#gap-input:focus,
-#gap-input:hover {
-}
-
 #presentation-card {
   width: 75%;
   background-color: white;
