@@ -4,4 +4,4 @@ L'invention du téléphone, la première console de jeu, le chewing-gum, ... Mai
 
 Jouez seul ou entre amis pour déterminer qui de vous connaît le mieux l'histoire moderne.
 
-_Hellolife2750 -août 2023_
+_ClementAubr -août 2023_
